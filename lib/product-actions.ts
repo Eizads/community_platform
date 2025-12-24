@@ -4,6 +4,8 @@ import { auth, currentUser } from "@clerk/nextjs/server"
 import { z } from "zod"
 import { db } from "@/db"
 import { products } from "@/db/schema"
+import { eq, sql } from "drizzle-orm"
+import { revalidatePath } from "next/cache"
 
 interface State {
   success: boolean
@@ -148,6 +150,67 @@ export async function addProductAction(prevState: State, formData: FormData) {
         websiteUrl: data.websiteUrl as string,
         tags: data.tags as string,
       },
+    }
+  }
+}
+
+export async function upvoteProductAction(productId: number) {
+  try {
+    const { userId } = await auth()
+    if (!userId) {
+      return {
+        success: false,
+        message: "You must be logged in to vote",
+      }
+    }
+    await db
+      .update(products)
+      .set({
+        voteCount: sql`GREATEST(${products.voteCount} + 1, 0)`,
+      })
+      .where(eq(products.id, productId))
+
+    revalidatePath("/")
+    return {
+      success: true,
+      message: "Product voted successfully",
+    }
+  } catch (error) {
+    console.error(error, "failed to upvote product")
+    return {
+      success: false,
+      message: "Failed to upvote product. Please try again.",
+      voteCount: 0,
+    }
+  }
+}
+export async function downvoteProductAction(productId: number) {
+  try {
+    const { userId } = await auth()
+    if (!userId) {
+      return {
+        success: false,
+        message: "You must be logged in to vote",
+      }
+    }
+    await db
+      .update(products)
+      .set({
+        voteCount: sql`GREATEST(${products.voteCount} - 1, 0)`,
+      })
+      .where(eq(products.id, productId))
+
+    revalidatePath("/")
+    return {
+      success: true,
+      message: "Product downvoted successfully",
+    }
+  } catch (error) {
+    console.error(error, "failed to downvote product")
+    return {
+      success: false,
+      message: "Failed to downvote product. Please try again.",
+      voteCount: 0,
     }
   }
 }
