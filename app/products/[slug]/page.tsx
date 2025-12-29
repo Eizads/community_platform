@@ -1,4 +1,4 @@
-import { getAllProducts } from "@/lib/db-queries"
+import { getFeaturedProducts } from "@/lib/db-queries"
 import { getProductBySlug } from "@/lib/db-queries"
 import { notFound } from "next/navigation"
 import SectionHeader from "@/components/common/section-header"
@@ -11,9 +11,10 @@ import { cn } from "@/lib/utils"
 import ProductVoting from "@/components/products/product-voting"
 
 export async function generateStaticParams() {
-  const products = await getAllProducts()
+  const products = await getFeaturedProducts()
   return products.map(product => ({ slug: product.slug }))
 }
+
 export default async function ProductPage({
   params,
 }: {

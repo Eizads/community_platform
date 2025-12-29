@@ -170,7 +170,17 @@ export async function upvoteProductAction(productId: number) {
       })
       .where(eq(products.id, productId))
 
+    // Fetch slug to revalidate the product page
+    const [product] = await db
+      .select({ slug: products.slug })
+      .from(products)
+      .where(eq(products.id, productId))
+      .limit(1)
+
     revalidatePath("/")
+    if (product?.slug) {
+      revalidatePath(`/products/${product.slug}`)
+    }
     return {
       success: true,
       message: "Product voted successfully",
@@ -200,7 +210,17 @@ export async function downvoteProductAction(productId: number) {
       })
       .where(eq(products.id, productId))
 
+    // Fetch slug to revalidate the product page
+    const [product] = await db
+      .select({ slug: products.slug })
+      .from(products)
+      .where(eq(products.id, productId))
+      .limit(1)
+
     revalidatePath("/")
+    if (product?.slug) {
+      revalidatePath(`/products/${product.slug}`)
+    }
     return {
       success: true,
       message: "Product downvoted successfully",

@@ -45,11 +45,12 @@ export async function getProductById(id: number) {
 }
 
 export async function getProductBySlug(slug: string) {
+  "use cache"
   const [product] = await db
     .select()
     .from(products)
     .where(eq(products.slug, slug))
     .limit(1)
 
-  return product || null
+  return product ?? null
 }
