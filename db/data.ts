@@ -120,19 +120,4 @@ export const allProducts = [
     submittedBy: "api@example.com",
     voteCount: 445,
   },
-  {
-    id: 9,
-    name: "Developer to Leader Course",
-    slug: "developer-to-leader-course",
-    tagline: "Learn to lead a team of developers",
-    description:
-      "Learn to lead a team of developers and become a leader in your field. This course is designed for developers who want to take the next step in their career and become a leader in their field.",
-    websiteUrl: "https://developertoleader.com",
-    tags: ["Leadership", "Management", "Development"],
-    createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
-    approvedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
-    status: "pending" as const,
-    submittedBy: "kulkarni.ankita09@gmail.com",
-    voteCount: 340,
-  },
 ]

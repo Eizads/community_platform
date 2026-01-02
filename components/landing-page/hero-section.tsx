@@ -45,8 +45,8 @@ export default function HeroSection() {
         </p>
         <div className="flex flex-col sm:flex-row mb-16 gap-4">
           <Button asChild size={"lg"} className="w-full sm:w-auto">
-            <Link href={"/sign-up"}>
-              <SparklesIcon className="w-4 h-4" /> Sign Up
+            <Link href={"/submit"}>
+              <SparklesIcon className="w-4 h-4" /> Share Your Project
             </Link>
           </Button>
           <Button
@@ -55,8 +55,8 @@ export default function HeroSection() {
             className="w-full sm:w-auto"
             variant={"outline"}
           >
-            <Link href={"/sign-up"}>
-              Login <ArrowRightIcon className="w-4 h-4" />
+            <Link href={"/explore"}>
+              Explore Projects <ArrowRightIcon className="w-4 h-4" />
             </Link>
           </Button>
         </div>

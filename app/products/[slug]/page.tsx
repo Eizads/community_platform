@@ -44,7 +44,7 @@ export default async function ProductPage({
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 my-8">
           <div className="lg:col-span-2 space-y-4">
             <SectionHeader
-              icon={StarIcon}
+              icon={product.voteCount > 100 ? StarIcon : undefined}
               title={name || ""}
               description={tagline || ""}
               headingLevel="h1"

@@ -2,18 +2,24 @@
 
 import { Button } from "../ui/button"
 import { ChevronUpIcon, ChevronDownIcon } from "lucide-react"
-import { useState, startTransition, useOptimistic } from "react"
+import { startTransition, useOptimistic } from "react"
 import {
   upvoteProductAction,
   downvoteProductAction,
 } from "@/lib/product-actions"
 import { InferSelectModel } from "drizzle-orm"
 import { products } from "@/db/schema"
-
+import { toast } from "sonner"
+import { useAuth } from "@clerk/nextjs"
+import { cn } from "@/lib/utils"
 type Product = InferSelectModel<typeof products>
 
 export default function ProductVoting({ product }: { product: Product }) {
-  const [hasVoted, setHasVoted] = useState(false)
+  const { isSignedIn, isLoaded } = useAuth()
+
+  // Only disable if auth is loaded AND user is not signed in
+  // If auth is still loading (isLoaded = false), keep disabled to prevent premature clicks
+  const isDisabled = !isLoaded || !isSignedIn
 
   const [optimisticVoteCount, setOptimisticVoteCount] = useOptimistic(
     product.voteCount,
@@ -31,9 +37,9 @@ export default function ProductVoting({ product }: { product: Product }) {
   )
 
   const handleVote = async (e: React.MouseEvent, direction: "up" | "down") => {
+    console.log("handleVote called", direction, "isSignedIn:", isSignedIn)
     e.stopPropagation()
     e.preventDefault()
-    setHasVoted(true)
 
     if (direction === "up") {
       startTransition(() => {
@@ -46,6 +52,7 @@ export default function ProductVoting({ product }: { product: Product }) {
         // The optimistic value will sync when the component re-renders with new data
       } else {
         console.log(result, "upvote failed")
+        toast.error(result.message)
         startTransition(() => {
           setOptimisticVoteCount("down") // Revert optimistic update
         })
@@ -61,6 +68,7 @@ export default function ProductVoting({ product }: { product: Product }) {
         // The optimistic value will sync when the component re-renders with new data
       } else {
         console.log(result, "downvote failed")
+        toast.error(result.message)
         startTransition(() => {
           setOptimisticVoteCount("up") // Revert optimistic update
         })
@@ -72,24 +80,46 @@ export default function ProductVoting({ product }: { product: Product }) {
   return (
     <div
       className="flex flex-col items-center justify-start gap-1 shrink-0"
-      onClick={e => e.stopPropagation()}
+      onClickCapture={e => {
+        // Stop propagation to prevent Link navigation
+        const target = e.target as HTMLElement
+        // If clicking on a button, let it handle the click
+        // Otherwise, stop propagation to prevent Link navigation
+        if (!target.closest("button")) {
+          e.stopPropagation()
+        }
+        // If not signed in and clicking outside button, show error
+        if (!isSignedIn && !target.closest("button")) {
+          e.preventDefault()
+          toast.error("You must be logged in to vote")
+        }
+      }}
     >
       <Button
         variant="ghost"
         size="icon"
-        className={hasVoted ? "text-sky-500" : "text-foreground/25 "}
+        className={isSignedIn ? "text-sky-500" : "text-foreground/25 "}
         onClick={e => handleVote(e, "up")}
+        disabled={isDisabled}
+        aria-label={isSignedIn ? "Upvote" : "Sign in to vote"}
       >
         <ChevronUpIcon className="w-4 h-4 " />
       </Button>
-      <span className="text-sm font-semibold transition-colors">
+      <span
+        className={cn(
+          "text-sm font-semibold transition-colors",
+          isSignedIn ? "text-sky-600" : "text-foreground/25"
+        )}
+      >
         {optimisticVoteCount}
       </span>
       <Button
         variant="ghost"
         size="icon"
-        className={hasVoted ? "text-sky-500" : "text-foreground/25"}
+        className={isSignedIn ? "text-sky-500" : "text-foreground/25"}
         onClick={e => handleVote(e, "down")}
+        disabled={isDisabled}
+        aria-label={isSignedIn ? "Downvote" : "Sign in to vote"}
       >
         <ChevronDownIcon className="w-4 h-4 " />
       </Button>

@@ -3,8 +3,8 @@ import FormField from "../forms/form-field"
 import { Button } from "../ui/button"
 import { Loader2Icon, SparklesIcon } from "lucide-react"
 import { addProductAction } from "@/lib/product-actions"
-import { useActionState } from "react"
-import { cn } from "@/lib/utils"
+import { useActionState, useEffect } from "react"
+import { toast } from "sonner"
 
 const initialState: {
   success: boolean
@@ -31,22 +31,19 @@ export default function ProductSubmitForm() {
   )
   const { errors, message, success, values } = state
 
+  // Show toast when message changes
+  useEffect(() => {
+    if (message) {
+      if (success) {
+        toast.success(message)
+      } else {
+        toast.error(message)
+      }
+    }
+  }, [message, success])
+
   return (
     <form className="space-y-6" action={formAction} noValidate>
-      {message && (
-        <div
-          aria-live="polite"
-          role="alert"
-          className={cn(
-            "bg-green-100 border px-4 py-3 rounded relative",
-            success
-              ? "bg-green-100 border-green-400 text-green-700"
-              : "bg-red-100 border-red-400 text-red-700"
-          )}
-        >
-          <span className="block sm:inline">{message}</span>
-        </div>
-      )}
       <FormField
         id="name"
         name="name"
