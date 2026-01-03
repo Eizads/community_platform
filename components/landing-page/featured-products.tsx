@@ -1,4 +1,4 @@
-"use cache"
+// "use cache"
 import { StarIcon } from "lucide-react"
 import SectionHeader from "../common/section-header"
 import { Button } from "../ui/button"
