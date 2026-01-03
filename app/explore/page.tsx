@@ -2,6 +2,9 @@ import SectionHeader from "@/components/common/section-header"
 import { CompassIcon } from "lucide-react"
 import { getAllApprovedProducts } from "@/lib/db-queries"
 import ProductSearch from "@/components/explore/product-search"
+import FeaturedProducts from "@/components/landing-page/featured-products"
+import { Suspense } from "react"
+import RecentlyLaunchedSkeleton from "@/components/skeleton/recently-launched-skeleton"
 
 export default async function ExplorePage() {
   const products = await getAllApprovedProducts()
@@ -16,6 +19,9 @@ export default async function ExplorePage() {
         />
         {/* search and display products */}
         <ProductSearch products={products} />
+        <Suspense fallback={<RecentlyLaunchedSkeleton />}>
+          <FeaturedProducts />
+        </Suspense>
       </div>
     </section>
   )
