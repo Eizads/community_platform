@@ -41,7 +41,7 @@ export default function HeroSection() {
         </h1>
         <p className="text-lg text-muted-foreground mb-8 max-w-2xl leading-relaxed">
           A community for creators and builders to share their projects, get
-          feedback, and get help.
+          feedback, and get help
         </p>
         <div className="flex flex-col sm:flex-row mb-16 gap-4">
           <Button asChild size={"lg"} className="w-full sm:w-auto">
