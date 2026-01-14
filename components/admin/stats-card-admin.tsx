@@ -1,4 +1,7 @@
+"use client"
 import { cn } from "@/lib/utils"
+import { useTranslations } from "next-intl"
+
 export default function StatsCardAdmin({
   totalProducts,
   approvedProducts,
@@ -10,24 +13,26 @@ export default function StatsCardAdmin({
   rejectedProducts: number
   pendingProducts: number
 }) {
+  const t = useTranslations("AdminPage")
+
   const stats = [
     {
-      label: "Total",
+      label: t("statsTotal"),
       count: totalProducts,
       color: "bg-yellow-100",
     },
     {
-      label: "Approved",
+      label: t("statsApproved"),
       count: approvedProducts,
       color: "bg-green-100",
     },
     {
-      label: "Rejected",
+      label: t("statsRejected"),
       count: rejectedProducts,
       color: "bg-red-100",
     },
     {
-      label: "Pending",
+      label: t("statsPending"),
       count: pendingProducts,
       color: "bg-blue-100",
     },

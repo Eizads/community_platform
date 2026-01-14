@@ -6,12 +6,14 @@ import { Button } from "@/components/ui/button"
 import { ClockIcon, TrendingUpIcon } from "lucide-react"
 import ProductCard from "@/components/products/product-card"
 import { ProductWithTranslation } from "@/lib/types"
+import { useTranslations } from "next-intl"
 
 export default function ProductSearch({
   products,
 }: {
   products: ProductWithTranslation[]
 }) {
+  const t = useTranslations("ExplorePage")
   const [search, setSearch] = useState("")
   const [sortBy, setSortBy] = useState<"recent" | "trending">("recent")
   const productsCopy = [...products]
@@ -41,7 +43,7 @@ export default function ProductSearch({
         <div className="flex-1 relative">
           <Input
             type="text"
-            placeholder="Search products"
+            placeholder={t("searchPlaceholder")}
             value={search}
             onChange={e => setSearch(e.target.value)}
           />
@@ -51,22 +53,22 @@ export default function ProductSearch({
             variant={sortBy === "trending" ? "default" : "outline"}
             onClick={() => setSortBy("trending")}
           >
-            <TrendingUpIcon className="w-4 h-4" /> Trending
+            <TrendingUpIcon className="w-4 h-4" /> {t("trending")}
           </Button>
           <Button
             variant={sortBy === "recent" ? "default" : "outline"}
             onClick={() => setSortBy("recent")}
           >
-            <ClockIcon className="w-4 h-4" /> Recent
+            <ClockIcon className="w-4 h-4" /> {t("recent")}
           </Button>
         </div>
       </div>
       <p className="text-sm text-muted-foreground mb-2">
         {sortedProducts.length == 0
-          ? "No products found"
+          ? t("noProducts")
           : sortedProducts.length == 1
-          ? "Showing 1 product"
-          : "Showing " + sortedProducts.length + " products"}
+          ? t("showingOne")
+          : t("showingMany", { count: sortedProducts.length })}
       </p>
       <div className="grid-wrapper mt-4">
         {sortedProducts.map(product => (

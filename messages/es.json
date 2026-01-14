@@ -49,31 +49,36 @@
   },
   "ExplorePage": {
     "title": "Explorar Todos los Productos",
-    "description": "Navega por todos los productos de la comunidad"
+    "description": "Navega por todos los productos de la comunidad",
+    "searchPlaceholder": "Buscar productos",
+    "trending": "Tendencias",
+    "recent": "Recientes",
+    "noProducts": "No se encontraron productos",
+    "showingOne": "Mostrando 1 producto",
+    "showingMany": "Mostrando {count} productos"
   },
   "SubmitPage": {
     "title": "Enviar un Proyecto",
     "description": "Envía un proyecto a la comunidad"
   },
   "SubmitForm": {
-    "nameLabel": "Nombre",
+    "nameLabel": "Nombre*",
     "namePlaceholder": "Ingresa el nombre del producto",
-    "slugLabel": "Slug",
+    "slugLabel": "Slug*",
     "slugPlaceholder": "Ingresa el slug del producto",
     "slugHelper": "El slug es la versión amigable para URL del nombre del producto.",
-    "taglineLabel": "Eslogan",
+    "taglineLabel": "Eslogan*",
     "taglinePlaceholder": "Un eslogan corto y atractivo para tu producto",
     "descriptionLabel": "Descripción",
     "descriptionPlaceholder": "Cuéntanos sobre tu producto",
     "websiteUrlLabel": "URL del Sitio Web",
     "websiteUrlPlaceholder": "https://ejemplo.com",
     "websiteUrlHelper": "La URL del sitio web es la URL del sitio web del producto.",
-    "tagsLabel": "Etiquetas",
-    "tagsPlaceholder": "p. ej., IA, Productividad, SaaS (separadas por comas)",
-    "tagsHelper": "Las etiquetas ayudan a los usuarios a descubrir tu producto.",
+    "tagsLabel": "Etiquetas*",
+    "tagsPlaceholder": "IA, Productividad, SaaS",
+    "tagsHelper": "Las etiquetas son las palabras clave que describen tu producto.",
     "submitButton": "Enviar Producto",
-    "submittingButton": "Enviando...",
-    "required": "*"
+    "submittingButton": "Enviando..."
   },
   "AdminPage": {
     "title": "Administrador de Productos",
@@ -84,7 +89,11 @@
     "approveButton": "Aprobar",
     "rejectButton": "Rechazar",
     "deleteButton": "eliminar",
-    "visitWebsite": "Visitar Sitio Web"
+    "visitWebsite": "Visitar Sitio Web",
+    "statsTotal": "Total",
+    "statsApproved": "Aprobados",
+    "statsRejected": "Rechazados",
+    "statsPending": "Pendientes"
   },
   "ProductStatus": {
     "approved": "Aprobado",
@@ -92,10 +101,20 @@
     "pending": "Pendiente"
   },
   "Common": {
+    "english": "English",
+    "spanish": "Español",
+    "englishShort": "EN",
+    "spanishShort": "ES",
+    "signIn": "Iniciar Sesión",
+    "signUp": "Registrarse",
+    "by": "Por",
+    "visitWebsite": "Visitar Sitio Web",
+    "delete": "eliminar",
     "loading": "Cargando...",
     "error": "Error",
     "success": "Éxito",
     "upvote": "Votar a favor",
-    "downvote": "Votar en contra"
+    "downvote": "Votar en contra",
+    "allRightsReserved": "Todos los derechos reservados."
   }
 }

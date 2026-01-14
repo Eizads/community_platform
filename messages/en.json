@@ -49,31 +49,36 @@
   },
   "ExplorePage": {
     "title": "Explore All Products",
-    "description": "Browse all products from the community"
+    "description": "Browse all products from the community",
+    "searchPlaceholder": "Search products",
+    "trending": "Trending",
+    "recent": "Recent",
+    "noProducts": "No products found",
+    "showingOne": "Showing 1 product",
+    "showingMany": "Showing {count} products"
   },
   "SubmitPage": {
     "title": "Submit a Project",
     "description": "Submit a project to the community"
   },
   "SubmitForm": {
-    "nameLabel": "Name",
+    "nameLabel": "Name*",
     "namePlaceholder": "Enter the name of the product",
-    "slugLabel": "Slug",
+    "slugLabel": "Slug*",
     "slugPlaceholder": "Enter the slug of the product",
     "slugHelper": "The slug is the URL-friendly version of the product name.",
-    "taglineLabel": "Tagline",
+    "taglineLabel": "Tagline*",
     "taglinePlaceholder": "A short, catchy tagline for your product",
     "descriptionLabel": "Description",
     "descriptionPlaceholder": "Tell us about your product",
     "websiteUrlLabel": "Website URL",
     "websiteUrlPlaceholder": "https://example.com",
     "websiteUrlHelper": "The website URL is the URL of the product's website.",
-    "tagsLabel": "Tags",
-    "tagsPlaceholder": "e.g., AI, Productivity, SaaS (comma separated)",
-    "tagsHelper": "Tags help users discover your product.",
+    "tagsLabel": "Tags*",
+    "tagsPlaceholder": "AI, Productivity, SaaS",
+    "tagsHelper": "The tags are the keywords that describe your product.",
     "submitButton": "Submit Product",
-    "submittingButton": "Submitting...",
-    "required": "*"
+    "submittingButton": "Submitting..."
   },
   "AdminPage": {
     "title": "Product Admin",
@@ -84,7 +89,11 @@
     "approveButton": "Approve",
     "rejectButton": "Reject",
     "deleteButton": "delete",
-    "visitWebsite": "Visit Website"
+    "visitWebsite": "Visit Website",
+    "statsTotal": "Total",
+    "statsApproved": "Approved",
+    "statsRejected": "Rejected",
+    "statsPending": "Pending"
   },
   "ProductStatus": {
     "approved": "Approved",
@@ -92,10 +101,20 @@
     "pending": "Pending"
   },
   "Common": {
+    "english": "English",
+    "spanish": "Español",
+    "englishShort": "EN",
+    "spanishShort": "ES",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "by": "By",
+    "visitWebsite": "Visit Website",
+    "delete": "delete",
     "loading": "Loading...",
     "error": "Error",
     "success": "Success",
     "upvote": "Upvote",
-    "downvote": "Downvote"
+    "downvote": "Downvote",
+    "allRightsReserved": "All rights reserved."
   }
 }

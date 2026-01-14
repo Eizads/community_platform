@@ -5,6 +5,7 @@ import { Loader2Icon, SparklesIcon } from "lucide-react"
 import { addProductAction } from "@/lib/product-actions"
 import { useActionState, useEffect } from "react"
 import { toast } from "sonner"
+import { useTranslations } from "next-intl"
 
 const initialState: {
   success: boolean
@@ -25,6 +26,7 @@ const initialState: {
   values: undefined,
 }
 export default function ProductSubmitForm() {
+  const t = useTranslations("SubmitForm")
   const [state, formAction, isPending] = useActionState(
     addProductAction,
     initialState
@@ -47,8 +49,8 @@ export default function ProductSubmitForm() {
       <FormField
         id="name"
         name="name"
-        label="Name*"
-        placeholder="Enter the name of the product"
+        label={t("nameLabel")}
+        placeholder={t("namePlaceholder")}
         required
         onChange={() => {}}
         error={errors?.name?.[0] || ""}
@@ -58,19 +60,19 @@ export default function ProductSubmitForm() {
       <FormField
         id="slug"
         name="slug"
-        label="Slug*"
-        placeholder="Enter the slug of the product"
+        label={t("slugLabel")}
+        placeholder={t("slugPlaceholder")}
         required
         onChange={() => {}}
         error={errors?.slug?.[0] || ""}
-        helperText="The slug is the URL-friendly version of the product name."
+        helperText={t("slugHelper")}
         defaultValue={values?.slug}
       />
       <FormField
         id="tagline"
         name="tagline"
-        label="Tagline*"
-        placeholder="A short, catchy tagline for your product"
+        label={t("taglineLabel")}
+        placeholder={t("taglinePlaceholder")}
         required
         onChange={() => {}}
         error={errors?.tagline?.[0] || ""}
@@ -80,8 +82,8 @@ export default function ProductSubmitForm() {
       <FormField
         id="description"
         name="description"
-        label="Description"
-        placeholder="Tell us about your product"
+        label={t("descriptionLabel")}
+        placeholder={t("descriptionPlaceholder")}
         onChange={() => {}}
         error={errors?.description?.[0] || ""}
         helperText={undefined}
@@ -91,31 +93,32 @@ export default function ProductSubmitForm() {
       <FormField
         id="websiteUrl"
         name="websiteUrl"
-        label="Website URL"
-        placeholder="https://example.com"
+        label={t("websiteUrlLabel")}
+        placeholder={t("websiteUrlPlaceholder")}
         onChange={() => {}}
         error={errors?.websiteUrl?.[0] || ""}
-        helperText="The website URL is the URL of the product's website."
+        helperText={t("websiteUrlHelper")}
         defaultValue={values?.websiteUrl}
       />
       <FormField
         id="tags"
         name="tags"
-        label="Tags*"
-        placeholder="AI, Productivity, SaaS"
+        label={t("tagsLabel")}
+        placeholder={t("tagsPlaceholder")}
         required
         onChange={() => {}}
         error={errors?.tags?.[0] || ""}
-        helperText="The tags are the keywords that describe your product."
+        helperText={t("tagsHelper")}
         defaultValue={values?.tags}
       />
       {isPending ? (
         <Button type="submit" className="w-full" disabled>
-          <Loader2Icon className="w-4 h-4 animate-spin" /> Submitting...
+          <Loader2Icon className="w-4 h-4 animate-spin" />{" "}
+          {t("submittingButton")}
         </Button>
       ) : (
         <Button type="submit" className="w-full">
-          <SparklesIcon className="w-4 h-4" /> Submit Product
+          <SparklesIcon className="w-4 h-4" /> {t("submitButton")}
         </Button>
       )}
     </form>

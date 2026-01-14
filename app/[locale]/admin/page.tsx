@@ -59,14 +59,12 @@ export default async function AdminPage({ params }: Props) {
           description={t("description")}
           headingLevel="h1"
         />
-        {/* stats card */}
         <StatsCardAdmin
           totalProducts={totalProducts}
           approvedProducts={approvedProducts}
           rejectedProducts={rejectedProducts}
           pendingProducts={pendingProducts}
         />
-        {/* {pending approval} */}
         <h2 className="text-2xl font-bold">
           {t("pendingApproval")} ({pendingApprovalProducts.length})
         </h2>
@@ -80,7 +78,6 @@ export default async function AdminPage({ params }: Props) {
             ))}
           </div>
         )}
-        {/* all products */}
 
         <h2 className="text-2xl font-bold">{t("allProducts")}</h2>
         <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 mt-4">

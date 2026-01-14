@@ -1,8 +1,9 @@
 import "dotenv/config"
 import { drizzle } from "drizzle-orm/neon-http"
 import { neon } from "@neondatabase/serverless"
-import { products } from "./schema"
+import { products, productTranslations } from "./schema"
 import { allProducts } from "./data"
+import { eq, and } from "drizzle-orm"
 
 const db = drizzle(process.env.DATABASE_URL!)
 const sql = neon(process.env.DATABASE_URL!)
@@ -19,20 +20,30 @@ async function main() {
   await sql`SELECT setval('products_id_seq', 1, false)`
   console.log("✅ Reset sequence to start from 1")
 
-  // Insert products from data.ts
+  // Insert products with translations
   for (const product of allProducts) {
-    await db.insert(products).values({
+    // Insert product (without translatable fields)
+    const [newProduct] = await db
+      .insert(products)
+      .values({
+        slug: product.slug,
+        websiteUrl: product.websiteUrl,
+        tags: product.tags,
+        voteCount: product.voteCount || 0,
+        createdAt: product.createdAt,
+        approvedAt: product.approvedAt,
+        status: product.status,
+        submittedBy: product.submittedBy,
+      })
+      .returning()
+
+    // Insert English translation
+    await db.insert(productTranslations).values({
+      productId: newProduct.id,
+      locale: "en",
       name: product.name,
-      slug: product.slug,
       tagline: product.tagline,
       description: product.description,
-      websiteUrl: product.websiteUrl,
-      tags: product.tags,
-      voteCount: product.voteCount || 0,
-      createdAt: product.createdAt,
-      approvedAt: product.approvedAt,
-      status: product.status,
-      submittedBy: product.submittedBy,
     })
 
     console.log(
@@ -49,11 +60,23 @@ async function main() {
   console.log(`\n🎉 Successfully seeded ${insertedProducts.length} products!`)
 
   console.log("\n📦 Products in database:")
-  insertedProducts.forEach(product => {
+  for (const product of insertedProducts) {
+    const [translation] = await db
+      .select()
+      .from(productTranslations)
+      .where(
+        and(
+          eq(productTranslations.productId, product.id),
+          eq(productTranslations.locale, "en")
+        )
+      )
+      .limit(1)
     console.log(
-      `  - ${product.name} (${product.slug}) - ${product.voteCount} votes`
+      `  - ${translation?.name || "Unknown"} (${product.slug}) - ${
+        product.voteCount
+      } votes`
     )
-  })
+  }
 }
 
 main()
