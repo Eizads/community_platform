@@ -28,6 +28,11 @@
     "viewAllButton": "View All Products",
     "featuredBadge": "Featured"
   },
+  "RecentlyLaunched": {
+    "title": "Recently Launched",
+    "description": "Discover the latest products from our community",
+    "emptyMessage": "No products have been launched recently. Check back later!"
+  },
   "ProductsPage": {
     "title": "All Products",
     "description": "All products from the community"

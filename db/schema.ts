@@ -8,6 +8,7 @@ import {
   json,
   uniqueIndex,
   index,
+  primaryKey,
 } from "drizzle-orm/pg-core"
 
 // ============= PRODUCTS =============
@@ -16,11 +17,8 @@ export const products = pgTable(
   {
     id: serial("id").primaryKey(),
 
-    // Core product info
-    name: varchar("name", { length: 120 }).notNull(),
+    // Core product info (now language-agnostic)
     slug: varchar("slug", { length: 140 }).notNull().unique(),
-    tagline: varchar("tagline", { length: 200 }),
-    description: text("description"),
 
     // Links & media
     websiteUrl: text("website_url"),
@@ -43,5 +41,26 @@ export const products = pgTable(
     uniqueIndex("products_slug_idx").on(table.slug),
     index("products_status_idx").on(table.status),
     index("products_organization_idx").on(table.organizationId),
+  ]
+)
+
+// ============= PRODUCT TRANSLATIONS =============
+export const productTranslations = pgTable(
+  "product_translations",
+  {
+    id: serial("id").primaryKey(),
+    productId: integer("product_id")
+      .notNull()
+      .references(() => products.id, { onDelete: "cascade" }),
+    locale: varchar("locale", { length: 10 }).notNull(), // en, es, fr, etc.
+    name: varchar("name", { length: 120 }).notNull(),
+    tagline: varchar("tagline", { length: 200 }),
+    description: text("description"),
+  },
+  table => [
+    // Composite unique constraint: one translation per product per locale
+    primaryKey({ columns: [table.productId, table.locale] }),
+    index("product_translations_product_idx").on(table.productId),
+    index("product_translations_locale_idx").on(table.locale),
   ]
 )

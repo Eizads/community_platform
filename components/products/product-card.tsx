@@ -10,15 +10,11 @@ import {
 import { Badge } from "../ui/badge"
 import { StarIcon } from "lucide-react"
 import { Link } from "@/i18n/navigation"
-import { InferSelectModel } from "drizzle-orm"
-import { products } from "@/db/schema"
-
+import { ProductWithTranslation } from "@/lib/types"
 import ProductVoting from "./product-voting"
 import { useTranslations } from "next-intl"
 
-type Product = InferSelectModel<typeof products>
-
-function ProductCard({ product }: { product: Product }) {
+function ProductCard({ product }: { product: ProductWithTranslation }) {
   const t = useTranslations("FeaturedProducts")
   return (
     <Link href={`/products/${product.slug}`}>
@@ -33,7 +29,8 @@ function ProductCard({ product }: { product: Product }) {
                 {/* Show featured badge if vote count is greater than 100 */}
                 {product.voteCount > 100 && (
                   <Badge className="bg-sky-500 text-white" variant="default">
-                    <StarIcon className="w-4 h-4 fill-current" /> {t("featuredBadge")}
+                    <StarIcon className="w-4 h-4 fill-current" />{" "}
+                    {t("featuredBadge")}
                   </Badge>
                 )}
               </div>
@@ -45,7 +42,7 @@ function ProductCard({ product }: { product: Product }) {
         </CardHeader>
         <CardContent>
           <CardFooter className="px-0 gap-2 flex-wrap">
-            {product.tags?.map(tag => (
+            {product.tags?.map((tag: string) => (
               <Badge key={tag} className="text-sm" variant="secondary">
                 {tag}
               </Badge>

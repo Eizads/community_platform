@@ -1,5 +1,5 @@
 "use client"
-import { ProductType } from "@/lib/types"
+import { ProductWithTranslation } from "@/lib/types"
 import {
   Card,
   CardHeader,
@@ -21,12 +21,11 @@ import { useTranslations } from "next-intl"
 export default function AdminProductCard({
   product,
 }: {
-  product: ProductType
+  product: ProductWithTranslation
 }) {
   const t = useTranslations("AdminPage")
-  const tStatus = useTranslations("ProductStatus")
   const tDetails = useTranslations("ProductDetails")
-  
+
   const handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
     e.preventDefault()
@@ -61,7 +60,7 @@ export default function AdminProductCard({
             <CardDescription>{product.description}</CardDescription>
             {/* tags */}
             <div className="flex flex-row gap-2 flex-wrap">
-              {product.tags?.map(tag => (
+              {product.tags?.map((tag: string) => (
                 <Badge key={tag} className="text-sm " variant="secondary">
                   {tag}
                 </Badge>
@@ -70,7 +69,8 @@ export default function AdminProductCard({
             {/* submitted by */}
             <div className="flex flex-row gap-2 flex-wrap items-center">
               <p className="text-sm text-gray-500">
-                {tDetails("by")}: <span className="font-bold">{product.submittedBy}</span>
+                {tDetails("by")}:{" "}
+                <span className="font-bold">{product.submittedBy}</span>
               </p>
               <p className="text-sm text-gray-500">
                 {product.createdAt

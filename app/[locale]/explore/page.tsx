@@ -12,8 +12,8 @@ export default async function ExplorePage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations("ExplorePage")
-  
-  const products = await getAllApprovedProducts()
+
+  const products = await getAllApprovedProducts(locale)
   return (
     <section className="bg-slate-100 flex-1 flex flex-col">
       <div className="container py-10 space-y-4">

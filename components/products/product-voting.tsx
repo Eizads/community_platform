@@ -7,14 +7,16 @@ import {
   upvoteProductAction,
   downvoteProductAction,
 } from "@/lib/product-actions"
-import { InferSelectModel } from "drizzle-orm"
-import { products } from "@/db/schema"
 import { toast } from "sonner"
 // import { useAuth } from "@clerk/nextjs"
 import { cn } from "@/lib/utils"
-type Product = InferSelectModel<typeof products>
+import { ProductWithTranslation } from "@/lib/types"
 
-export default function ProductVoting({ product }: { product: Product }) {
+export default function ProductVoting({
+  product,
+}: {
+  product: ProductWithTranslation
+}) {
   // const { isSignedIn } = useAuth()
 
   const [optimisticVoteCount, setOptimisticVoteCount] = useOptimistic(

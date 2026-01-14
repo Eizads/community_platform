@@ -12,8 +12,8 @@ export default async function Products({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations("ProductsPage")
-  
-  const products = await getAllApprovedProducts()
+
+  const products = await getAllApprovedProducts(locale)
   return (
     <section className="bg-slate-100 py-10">
       <div className="container">

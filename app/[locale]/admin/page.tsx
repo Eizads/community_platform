@@ -34,7 +34,7 @@ export default async function AdminPage({ params }: Props) {
   }
 
   // get all products
-  const products = await getAllProducts()
+  const products = await getAllProducts(locale)
   const totalProducts = products.length
   const approvedProducts = products.filter(
     product => product.status === "approved"

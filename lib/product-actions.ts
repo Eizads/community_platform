@@ -3,7 +3,7 @@
 import { auth, currentUser } from "@clerk/nextjs/server"
 import { z } from "zod"
 import { db } from "@/db"
-import { products } from "@/db/schema"
+import { products, productTranslations } from "@/db/schema"
 import { eq, sql } from "drizzle-orm"
 import { revalidatePath } from "next/cache"
 
@@ -101,16 +101,26 @@ export async function addProductAction(prevState: State, formData: FormData) {
     // const tagsArray = tags ? tags.filter(tag => typeof tag === "string") : []
 
     //transform data
-    await db.insert(products).values({
+    // Insert product (without translatable fields)
+    const [newProduct] = await db
+      .insert(products)
+      .values({
+        slug,
+        websiteUrl,
+        tags: tags || [],
+        status: "pending",
+        submittedBy: userEmail,
+        userId,
+      })
+      .returning()
+
+    // Insert default English translation
+    await db.insert(productTranslations).values({
+      productId: newProduct.id,
+      locale: "en", // Default locale for new submissions
       name,
-      slug,
       tagline,
       description,
-      websiteUrl,
-      tags: tags || [],
-      status: "pending",
-      submittedBy: userEmail,
-      userId,
     })
 
     return {
