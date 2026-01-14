@@ -6,21 +6,24 @@ import { ExternalLinkIcon, StarIcon } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { CalendarIcon, UserIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
 import { cn } from "@/lib/utils"
 import ProductVoting from "@/components/products/product-voting"
+import { setRequestLocale } from "next-intl/server"
 
 export async function generateStaticParams() {
   const products = await getFeaturedProducts()
-  return products.map(product => ({ slug: product.slug }))
+  return products.flatMap(product =>
+    ["en", "es"].map(locale => ({ locale, slug: product.slug }))
+  )
 }
 
 export default async function ProductPage({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ locale: string; slug: string }>
 }) {
-  const { slug } = await params
+  const { locale, slug } = await params
+  setRequestLocale(locale)
   const product = await getProductBySlug(slug)
   if (!product) {
     notFound()
@@ -103,14 +106,14 @@ export default async function ProductPage({
               )}
             </div>
             <Button variant="default" className="w-full " asChild>
-              <Link
+              <a
                 href={websiteUrl || ""}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Visit website
                 <ExternalLinkIcon className="w-4 h-4" />
-              </Link>
+              </a>
             </Button>
           </div>
         </div>

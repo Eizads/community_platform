@@ -1,11 +1,13 @@
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
 import { EyeIcon, UsersIcon, RocketIcon } from "lucide-react"
 import { ArrowRightIcon } from "lucide-react"
 import StatsCard from "./stats-card"
 import { SparklesIcon } from "lucide-react"
+import { useTranslations } from "next-intl"
 const LiveBadge = () => {
+  const t = useTranslations("HomePage")
   return (
     <Badge
       className="px-4 py-2 mb-8 text-sm backdrop-blur-sm "
@@ -16,7 +18,7 @@ const LiveBadge = () => {
         <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
       </span>
       <span className="test-left text-muted-foreground text-sm">
-        Join the community share your projects
+        {t("liveBadge")}
       </span>
     </Badge>
   )

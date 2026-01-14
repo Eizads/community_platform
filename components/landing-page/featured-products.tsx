@@ -1,8 +1,7 @@
-"use cache"
 import { StarIcon } from "lucide-react"
 import SectionHeader from "../common/section-header"
 import { Button } from "../ui/button"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
 import ProductCard from "../products/product-card"
 import { getFeaturedProducts } from "@/lib/db-queries"
 

@@ -1,7 +1,6 @@
 "use client"
 
 import { HomeIcon, CompassIcon, SparklesIcon, MenuIcon } from "lucide-react"
-import Link from "next/link"
 import { Button } from "../ui/button"
 import Logo from "../common/logo"
 import { SignInButton, SignUpButton, SignedIn, SignedOut } from "@clerk/nextjs"
@@ -15,8 +14,18 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
 import CustomUserButton from "./custom-user-button"
+import { GlobeIcon } from "lucide-react"
+import { Link, usePathname, useRouter } from "@/i18n/navigation"
+import { useLocale } from "next-intl"
 
 function Header() {
+  const locale = useLocale()
+  const pathname = usePathname()
+  const router = useRouter()
+
+  const switchLocale = (newLocale: string) => {
+    router.replace(pathname, { locale: newLocale })
+  }
   return (
     <header className="bg-background/20 border-b border-zinc-300 sticky top-0 z-50 backdrop-blur-sm">
       <div className="container flex flex-row items-center justify-between py-4 ">
@@ -50,6 +59,15 @@ function Header() {
                   <CompassIcon className="w-4 h-4" />
                   Explore
                 </Link>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => switchLocale("en")}>
+                <GlobeIcon className="w-4 h-4 mr-2" />
+                English {locale === "en" && "✓"}
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => switchLocale("es")}>
+                <GlobeIcon className="w-4 h-4 mr-2" />
+                Español {locale === "es" && "✓"}
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <Suspense fallback={<AuthSkeleton />}>
@@ -97,6 +115,23 @@ function Header() {
             <CompassIcon className="w-4 h-4 text-gray-500" />
             Explore
           </Link>
+
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="sm" aria-label="Change language">
+                <GlobeIcon className="w-4 h-4 mr-2" />
+                {locale === "en" ? "EN" : "ES"}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => switchLocale("en")}>
+                English {locale === "en" && "✓"}
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => switchLocale("es")}>
+                Español {locale === "es" && "✓"}
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </nav>
 
         {/* Desktop Auth Buttons */}

@@ -1,13 +1,21 @@
 import SectionHeader from "@/components/common/section-header"
 import { InboxIcon, ShieldIcon } from "lucide-react"
-import { redirect } from "next/navigation"
 import { auth, clerkClient } from "@clerk/nextjs/server"
+import { redirect } from "@/i18n/navigation"
 import { getAllProducts } from "@/lib/db-queries"
 import EmptyState from "@/components/common/empty-state"
 import StatsCardAdmin from "@/components/admin/stats-card-admin"
 import AdminProductCard from "@/components/admin/admin-product-card"
+import { setRequestLocale } from "next-intl/server"
 
-export default async function AdminPage() {
+type Props = {
+  params: Promise<{ locale: string }>
+}
+
+export default async function AdminPage({ params }: Props) {
+  const { locale } = await params
+  setRequestLocale(locale)
+  
   // checking if user is authenticated and is an admin
   const { userId } = await auth()
   // console.log("userId", userId) // Commented out for production - exposes user IDs

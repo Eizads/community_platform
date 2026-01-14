@@ -1,0 +1,11 @@
+{
+  "HomePage": {
+    "title": "BuildFlow",
+    "liveBadge": "Join the community share your projects",
+    "heroSectionTitle": "Share What You&apos;ve Built, Discover What Others Have Built",
+    "heroSectionDescription": "A community for creators and builders to share their projects, get feedback, and get help.",
+    "heroSectionButton": "Share Your Project",
+    "heroSectionButtonLink": "/submit",
+    "heroSectionButtonLinkText": "Explore Projects"
+  }
+}

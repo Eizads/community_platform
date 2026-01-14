@@ -3,7 +3,7 @@
 import { UserButton } from "@clerk/nextjs"
 import { Building2Icon } from "lucide-react"
 import { Button } from "../ui/button"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
 
 export default function CustomUserButton() {
   return (

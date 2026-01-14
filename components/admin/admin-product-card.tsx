@@ -9,7 +9,7 @@ import {
   CardFooter,
 } from "@/components/ui/card"
 import { Badge } from "../ui/badge"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
 // import ProductVoting from "../products/product-voting"
 import { cn } from "@/lib/utils"
 import { Button } from "../ui/button"

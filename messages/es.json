@@ -1,0 +1,11 @@
+{
+  "HomePage": {
+    "title": "Hello world!",
+    "liveBadge": "Únete a la comunidad y comparte tus proyectos",
+    "heroSectionTitle": "Comparte lo que has construido, descubre lo que otros han construido",
+    "heroSectionDescription": "Una comunidad para creadores y constructores para compartir sus proyectos, obtener feedback y obtener ayuda.",
+    "heroSectionButton": "Compartir tu proyecto",
+    "heroSectionButtonLink": "/submit",
+    "heroSectionButtonLinkText": "Explorar proyectos"
+  }
+}

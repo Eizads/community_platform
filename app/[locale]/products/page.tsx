@@ -2,7 +2,16 @@ import { getAllApprovedProducts } from "@/lib/db-queries"
 import SectionHeader from "@/components/common/section-header"
 import { StarIcon } from "lucide-react"
 import ProductCard from "@/components/products/product-card"
-export default async function Products() {
+import { setRequestLocale } from "next-intl/server"
+
+type Props = {
+  params: Promise<{ locale: string }>
+}
+
+export default async function Products({ params }: Props) {
+  const { locale } = await params
+  setRequestLocale(locale)
+  
   const products = await getAllApprovedProducts()
   return (
     <section className="bg-slate-100 py-10">

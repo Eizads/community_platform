@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card"
 import { Badge } from "../ui/badge"
 import { StarIcon } from "lucide-react"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
 import { InferSelectModel } from "drizzle-orm"
 import { products } from "@/db/schema"
 

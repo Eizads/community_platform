@@ -1,8 +1,15 @@
 import SectionHeader from "@/components/common/section-header"
 import { SparklesIcon } from "lucide-react"
 import ProductSubmitForm from "@/components/products/product-submit-form"
+import { setRequestLocale } from "next-intl/server"
 
-export default function SubmitPage() {
+type Props = {
+  params: Promise<{ locale: string }>
+}
+
+export default async function SubmitPage({ params }: Props) {
+  const { locale } = await params
+  setRequestLocale(locale)
   return (
     <section className="bg-slate-100 min-h-screen">
       <div className="container py-10 space-y-10">

@@ -2,8 +2,16 @@ import SectionHeader from "@/components/common/section-header"
 import { CompassIcon } from "lucide-react"
 import { getAllApprovedProducts } from "@/lib/db-queries"
 import ProductSearch from "@/components/explore/product-search"
+import { setRequestLocale } from "next-intl/server"
 
-export default async function ExplorePage() {
+type Props = {
+  params: Promise<{ locale: string }>
+}
+
+export default async function ExplorePage({ params }: Props) {
+  const { locale } = await params
+  setRequestLocale(locale)
+  
   const products = await getAllApprovedProducts()
   return (
     <section className="bg-slate-100 flex-1 flex flex-col">
