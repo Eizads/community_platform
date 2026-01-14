@@ -6,7 +6,7 @@ import { getAllProducts } from "@/lib/db-queries"
 import EmptyState from "@/components/common/empty-state"
 import StatsCardAdmin from "@/components/admin/stats-card-admin"
 import AdminProductCard from "@/components/admin/admin-product-card"
-import { setRequestLocale } from "next-intl/server"
+import { setRequestLocale, getTranslations } from "next-intl/server"
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -15,12 +15,14 @@ type Props = {
 export default async function AdminPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale)
-  
+  const t = await getTranslations("AdminPage")
+
   // checking if user is authenticated and is an admin
   const { userId } = await auth()
   // console.log("userId", userId) // Commented out for production - exposes user IDs
   if (!userId) {
-    return redirect("/sign-in")
+    redirect({ href: "/sign-in", locale })
+    return
   }
   const client = await clerkClient()
   const user = await client.users.getUser(userId)
@@ -28,7 +30,7 @@ export default async function AdminPage({ params }: Props) {
   const metadata = user.publicMetadata
   const isAdmin = metadata?.isAdmin ?? false
   if (!isAdmin) {
-    return redirect("/")
+    redirect({ href: "/", locale })
   }
 
   // get all products
@@ -53,8 +55,8 @@ export default async function AdminPage({ params }: Props) {
       <div className="container py-10 space-y-8">
         <SectionHeader
           icon={ShieldIcon}
-          title="Product Admin"
-          description="Review and manage submitted products"
+          title={t("title")}
+          description={t("description")}
           headingLevel="h1"
         />
         {/* stats card */}
@@ -66,14 +68,11 @@ export default async function AdminPage({ params }: Props) {
         />
         {/* {pending approval} */}
         <h2 className="text-2xl font-bold">
-          Pending Approval ({pendingApprovalProducts.length})
+          {t("pendingApproval")} ({pendingApprovalProducts.length})
         </h2>
 
         {pendingApprovalProducts.length === 0 ? (
-          <EmptyState
-            icon={InboxIcon}
-            message="No pending products to review. Check back later!"
-          />
+          <EmptyState icon={InboxIcon} message={t("emptyState")} />
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 mt-10">
             {pendingApprovalProducts.map(product => (
@@ -83,7 +82,7 @@ export default async function AdminPage({ params }: Props) {
         )}
         {/* all products */}
 
-        <h2 className="text-2xl font-bold">All Products</h2>
+        <h2 className="text-2xl font-bold">{t("allProducts")}</h2>
         <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
           {products.map(product => (
             <AdminProductCard key={product.id} product={product} />

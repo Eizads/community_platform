@@ -16,9 +16,10 @@ import {
 import CustomUserButton from "./custom-user-button"
 import { GlobeIcon } from "lucide-react"
 import { Link, usePathname, useRouter } from "@/i18n/navigation"
-import { useLocale } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 
 function Header() {
+  const t = useTranslations("Navigation")
   const locale = useLocale()
   const pathname = usePathname()
   const router = useRouter()
@@ -40,7 +41,7 @@ function Header() {
           </Suspense>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" aria-label="Open menu">
+              <Button variant="ghost" size="icon" aria-label={t("openMenu")}>
                 <MenuIcon className="h-5 w-5" />
               </Button>
             </DropdownMenuTrigger>
@@ -48,7 +49,7 @@ function Header() {
               <DropdownMenuItem asChild>
                 <Link href="/" className="flex items-center gap-2 w-full">
                   <HomeIcon className="w-4 h-4" />
-                  Home
+                  {t("home")}
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
@@ -57,7 +58,7 @@ function Header() {
                   className="flex items-center gap-2 w-full"
                 >
                   <CompassIcon className="w-4 h-4" />
-                  Explore
+                  {t("explore")}
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
@@ -74,12 +75,12 @@ function Header() {
                 <SignedOut>
                   <SignInButton mode="modal">
                     <DropdownMenuItem onSelect={e => e.preventDefault()}>
-                      Sign In
+                      {t("signIn")}
                     </DropdownMenuItem>
                   </SignInButton>
                   <SignUpButton mode="modal">
                     <DropdownMenuItem onSelect={e => e.preventDefault()}>
-                      Sign Up
+                      {t("signUp")}
                     </DropdownMenuItem>
                   </SignUpButton>
                 </SignedOut>
@@ -90,7 +91,7 @@ function Header() {
                       className="flex items-center gap-2 w-full"
                     >
                       <SparklesIcon className="w-4 h-4" />
-                      Submit a Project
+                      {t("submitProject")}
                     </Link>
                   </DropdownMenuItem>
                 </SignedIn>
@@ -105,7 +106,7 @@ function Header() {
             href="/"
             className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-muted-foreground  hover:text-foreground transition-colors hover:bg-muted/50"
           >
-            <HomeIcon className="w-4 h-4 text-gray-500" /> Home
+            <HomeIcon className="w-4 h-4 text-gray-500" /> {t("home")}
           </Link>
 
           <Link
@@ -113,12 +114,16 @@ function Header() {
             className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-muted-foreground  hover:text-foreground transition-colors hover:bg-muted/50"
           >
             <CompassIcon className="w-4 h-4 text-gray-500" />
-            Explore
+            {t("explore")}
           </Link>
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" aria-label="Change language">
+              <Button
+                variant="ghost"
+                size="sm"
+                aria-label={t("changeLanguage")}
+              >
                 <GlobeIcon className="w-4 h-4 mr-2" />
                 {locale === "en" ? "EN" : "ES"}
               </Button>
@@ -140,13 +145,13 @@ function Header() {
             <SignedOut>
               <SignInButton />
               <SignUpButton>
-                <Button>Sign Up</Button>
+                <Button>{t("signUp")}</Button>
               </SignUpButton>
             </SignedOut>
             <SignedIn>
               <Button asChild>
                 <Link href="/submit">
-                  <SparklesIcon className="w-4 h-4" /> Submit a Project
+                  <SparklesIcon className="w-4 h-4" /> {t("submitProject")}
                 </Link>
               </Button>
               <CustomUserButton />

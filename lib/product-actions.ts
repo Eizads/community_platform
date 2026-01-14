@@ -177,11 +177,16 @@ export async function upvoteProductAction(productId: number) {
       .where(eq(products.id, productId))
       .limit(1)
 
-    revalidatePath("/")
-    revalidatePath("/explore")
-    if (product?.slug) {
-      revalidatePath(`/products/${product.slug}`)
-    }
+    // Revalidate for all locales
+    const locales = ["en", "es"]
+    locales.forEach(locale => {
+      revalidatePath(`/${locale}`)
+      revalidatePath(`/${locale}/explore`)
+      revalidatePath(`/${locale}/products`)
+      if (product?.slug) {
+        revalidatePath(`/${locale}/products/${product.slug}`)
+      }
+    })
     return {
       success: true,
       message: "Product voted successfully",
@@ -218,11 +223,16 @@ export async function downvoteProductAction(productId: number) {
       .where(eq(products.id, productId))
       .limit(1)
 
-    revalidatePath("/")
-    revalidatePath("/explore")
-    if (product?.slug) {
-      revalidatePath(`/products/${product.slug}`)
-    }
+    // Revalidate for all locales
+    const locales = ["en", "es"]
+    locales.forEach(locale => {
+      revalidatePath(`/${locale}`)
+      revalidatePath(`/${locale}/explore`)
+      revalidatePath(`/${locale}/products`)
+      if (product?.slug) {
+        revalidatePath(`/${locale}/products/${product.slug}`)
+      }
+    })
     return {
       success: true,
       message: "Product downvoted successfully",

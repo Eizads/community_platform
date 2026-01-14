@@ -5,9 +5,10 @@ import { EyeIcon, UsersIcon, RocketIcon } from "lucide-react"
 import { ArrowRightIcon } from "lucide-react"
 import StatsCard from "./stats-card"
 import { SparklesIcon } from "lucide-react"
-import { useTranslations } from "next-intl"
-const LiveBadge = () => {
-  const t = useTranslations("HomePage")
+import { getTranslations } from "next-intl/server"
+
+async function LiveBadge() {
+  const t = await getTranslations("HomePage")
   return (
     <Badge
       className="px-4 py-2 mb-8 text-sm backdrop-blur-sm "
@@ -24,13 +25,16 @@ const LiveBadge = () => {
   )
 }
 
-export default function HeroSection() {
+export default async function HeroSection() {
+  const t = await getTranslations("HomePage")
+  const tStats = await getTranslations("Stats")
+
   const stats = [
-    { icon: RocketIcon, title: "Projects", value: "100k+" },
-    { icon: UsersIcon, title: "Users", value: "40k+", hasBorder: true },
+    { icon: RocketIcon, title: tStats("projects"), value: "100k+" },
+    { icon: UsersIcon, title: tStats("users"), value: "40k+", hasBorder: true },
     {
       icon: EyeIcon,
-      title: "Monthly Views",
+      title: tStats("monthlyViews"),
       value: "21k+",
     },
   ]
@@ -39,16 +43,15 @@ export default function HeroSection() {
       <div className="container flex flex-col items-center justify-center gap-4 text-center">
         <LiveBadge />
         <h1 className="text-5xl sm:text-3xl lg:text-7xl font-bold tracking-tight mb-4 max-w-4xl">
-          Share What You&apos;ve Built, Discover What Others Have Built{" "}
+          {t("heroTitle")}
         </h1>
         <p className="text-lg text-muted-foreground mb-8 max-w-2xl leading-relaxed">
-          A community for creators and builders to share their projects, get
-          feedback, and get help.
+          {t("heroDescription")}
         </p>
         <div className="flex flex-col sm:flex-row mb-16 gap-4">
           <Button asChild size={"lg"} className="w-full sm:w-auto">
             <Link href={"/submit"}>
-              <SparklesIcon className="w-4 h-4" /> Share Your Project
+              <SparklesIcon className="w-4 h-4" /> {t("shareProjectButton")}
             </Link>
           </Button>
           <Button
@@ -58,7 +61,8 @@ export default function HeroSection() {
             variant={"outline"}
           >
             <Link href={"/explore"}>
-              Explore Projects <ArrowRightIcon className="w-4 h-4" />
+              {t("exploreProjectsButton")}{" "}
+              <ArrowRightIcon className="w-4 h-4" />
             </Link>
           </Button>
         </div>

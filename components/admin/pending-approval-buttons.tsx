@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { CheckIcon, XIcon } from "lucide-react"
 import { approveProductAction, rejectProductAction } from "@/lib/admin-actions"
+import { useTranslations } from "next-intl"
 
 export default function PendingApprovalButtons({
   status,
@@ -11,6 +12,7 @@ export default function PendingApprovalButtons({
   status: string
   productId: number
 }) {
+  const t = useTranslations("AdminPage")
   if (status?.toLowerCase() !== "pending") {
     return null
   }
@@ -36,7 +38,7 @@ export default function PendingApprovalButtons({
         onClick={handleApproveAction}
       >
         <CheckIcon className="w-4 h-4" />
-        Approve
+        {t("approveButton")}
       </Button>
       <Button
         variant="destructive"
@@ -45,7 +47,7 @@ export default function PendingApprovalButtons({
         onClick={handleRejectAction}
       >
         <XIcon className="w-4 h-4" />
-        Reject
+        {t("rejectButton")}
       </Button>
     </div>
   )

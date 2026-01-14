@@ -14,10 +14,12 @@ import { InferSelectModel } from "drizzle-orm"
 import { products } from "@/db/schema"
 
 import ProductVoting from "./product-voting"
+import { useTranslations } from "next-intl"
 
 type Product = InferSelectModel<typeof products>
 
 function ProductCard({ product }: { product: Product }) {
+  const t = useTranslations("FeaturedProducts")
   return (
     <Link href={`/products/${product.slug}`}>
       <Card className="flex flex-col justify-between card-hover group hover:shadow-lg hover:scale-105 transition-all duration-300 min-h-[240px] sm:min-h-[350px] xl:min-h-[275px]">
@@ -31,7 +33,7 @@ function ProductCard({ product }: { product: Product }) {
                 {/* Show featured badge if vote count is greater than 100 */}
                 {product.voteCount > 100 && (
                   <Badge className="bg-sky-500 text-white" variant="default">
-                    <StarIcon className="w-4 h-4 fill-current" /> Featured
+                    <StarIcon className="w-4 h-4 fill-current" /> {t("featuredBadge")}
                   </Badge>
                 )}
               </div>

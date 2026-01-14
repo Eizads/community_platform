@@ -4,8 +4,10 @@ import { Button } from "../ui/button"
 import { Link } from "@/i18n/navigation"
 import ProductCard from "../products/product-card"
 import { getFeaturedProducts } from "@/lib/db-queries"
+import { getTranslations } from "next-intl/server"
 
 export default async function FeaturedProducts() {
+  const t = await getTranslations("FeaturedProducts")
   const featuredProducts = await getFeaturedProducts()
   return (
     <section className="bg-slate-100 py-10">
@@ -13,11 +15,11 @@ export default async function FeaturedProducts() {
         <div className="flex flex-row items-center justify-between">
           <SectionHeader
             icon={StarIcon}
-            title="Featured Products"
-            description="Top picks from the community"
+            title={t("title")}
+            description={t("description")}
           />
           <Button variant="outline" asChild className="hidden sm:flex">
-            <Link href="/products">View All Products</Link>
+            <Link href="/products">{t("viewAllButton")}</Link>
           </Button>
         </div>
 

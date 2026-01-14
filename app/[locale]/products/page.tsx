@@ -2,7 +2,7 @@ import { getAllApprovedProducts } from "@/lib/db-queries"
 import SectionHeader from "@/components/common/section-header"
 import { StarIcon } from "lucide-react"
 import ProductCard from "@/components/products/product-card"
-import { setRequestLocale } from "next-intl/server"
+import { setRequestLocale, getTranslations } from "next-intl/server"
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -11,6 +11,7 @@ type Props = {
 export default async function Products({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale)
+  const t = await getTranslations("ProductsPage")
   
   const products = await getAllApprovedProducts()
   return (
@@ -19,8 +20,8 @@ export default async function Products({ params }: Props) {
         <div className="flex flex-row items-center justify-between">
           <SectionHeader
             icon={StarIcon}
-            title="All Products"
-            description="All products from the community"
+            title={t("title")}
+            description={t("description")}
           />
         </div>
 

@@ -1,11 +1,96 @@
 {
+  "Navigation": {
+    "home": "Inicio",
+    "explore": "Explorar",
+    "submitProject": "Enviar un Proyecto",
+    "signIn": "Iniciar Sesión",
+    "signUp": "Registrarse",
+    "language": "Idioma",
+    "openMenu": "Abrir menú",
+    "changeLanguage": "Cambiar idioma"
+  },
   "HomePage": {
-    "title": "Hello world!",
+    "title": "BuildFlow",
     "liveBadge": "Únete a la comunidad y comparte tus proyectos",
-    "heroSectionTitle": "Comparte lo que has construido, descubre lo que otros han construido",
-    "heroSectionDescription": "Una comunidad para creadores y constructores para compartir sus proyectos, obtener feedback y obtener ayuda.",
-    "heroSectionButton": "Compartir tu proyecto",
-    "heroSectionButtonLink": "/submit",
-    "heroSectionButtonLinkText": "Explorar proyectos"
+    "heroTitle": "Comparte lo que has construido, descubre lo que otros han construido",
+    "heroDescription": "Una comunidad para creadores y constructores para compartir sus proyectos, obtener retroalimentación y obtener ayuda.",
+    "shareProjectButton": "Compartir tu proyecto",
+    "exploreProjectsButton": "Explorar proyectos"
+  },
+  "Stats": {
+    "projects": "Proyectos",
+    "users": "Usuarios",
+    "monthlyViews": "Vistas mensuales"
+  },
+  "FeaturedProducts": {
+    "title": "Productos Destacados",
+    "description": "Las mejores opciones de la comunidad",
+    "viewAllButton": "Ver Todos los Productos",
+    "featuredBadge": "Destacado"
+  },
+  "ProductsPage": {
+    "title": "Todos los Productos",
+    "description": "Todos los productos de la comunidad"
+  },
+  "ProductDetails": {
+    "about": "Acerca de",
+    "productDetails": "Detalles del Producto",
+    "launched": "Lanzado",
+    "submittedBy": "Enviado por",
+    "supportProduct": "Apoyar este producto",
+    "featuredProduct": "Producto Destacado",
+    "visitWebsite": "Visitar sitio web",
+    "by": "Por"
+  },
+  "ExplorePage": {
+    "title": "Explorar Todos los Productos",
+    "description": "Navega por todos los productos de la comunidad"
+  },
+  "SubmitPage": {
+    "title": "Enviar un Proyecto",
+    "description": "Envía un proyecto a la comunidad"
+  },
+  "SubmitForm": {
+    "nameLabel": "Nombre",
+    "namePlaceholder": "Ingresa el nombre del producto",
+    "slugLabel": "Slug",
+    "slugPlaceholder": "Ingresa el slug del producto",
+    "slugHelper": "El slug es la versión amigable para URL del nombre del producto.",
+    "taglineLabel": "Eslogan",
+    "taglinePlaceholder": "Un eslogan corto y atractivo para tu producto",
+    "descriptionLabel": "Descripción",
+    "descriptionPlaceholder": "Cuéntanos sobre tu producto",
+    "websiteUrlLabel": "URL del Sitio Web",
+    "websiteUrlPlaceholder": "https://ejemplo.com",
+    "websiteUrlHelper": "La URL del sitio web es la URL del sitio web del producto.",
+    "tagsLabel": "Etiquetas",
+    "tagsPlaceholder": "p. ej., IA, Productividad, SaaS (separadas por comas)",
+    "tagsHelper": "Las etiquetas ayudan a los usuarios a descubrir tu producto.",
+    "submitButton": "Enviar Producto",
+    "submittingButton": "Enviando...",
+    "required": "*"
+  },
+  "AdminPage": {
+    "title": "Administrador de Productos",
+    "description": "Revisar y gestionar productos enviados",
+    "pendingApproval": "Aprobación Pendiente",
+    "allProducts": "Todos los Productos",
+    "emptyState": "No hay productos pendientes para revisar. ¡Vuelve más tarde!",
+    "approveButton": "Aprobar",
+    "rejectButton": "Rechazar",
+    "deleteButton": "eliminar",
+    "visitWebsite": "Visitar Sitio Web"
+  },
+  "ProductStatus": {
+    "approved": "Aprobado",
+    "rejected": "Rechazado",
+    "pending": "Pendiente"
+  },
+  "Common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "upvote": "Votar a favor",
+    "downvote": "Votar en contra"
   }
 }

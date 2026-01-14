@@ -1,11 +1,96 @@
 {
+  "Navigation": {
+    "home": "Home",
+    "explore": "Explore",
+    "submitProject": "Submit a Project",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "language": "Language",
+    "openMenu": "Open menu",
+    "changeLanguage": "Change language"
+  },
   "HomePage": {
     "title": "BuildFlow",
     "liveBadge": "Join the community share your projects",
-    "heroSectionTitle": "Share What You&apos;ve Built, Discover What Others Have Built",
-    "heroSectionDescription": "A community for creators and builders to share their projects, get feedback, and get help.",
-    "heroSectionButton": "Share Your Project",
-    "heroSectionButtonLink": "/submit",
-    "heroSectionButtonLinkText": "Explore Projects"
+    "heroTitle": "Share What You've Built, Discover What Others Have Built",
+    "heroDescription": "A community for creators and builders to share their projects, get feedback, and get help.",
+    "shareProjectButton": "Share Your Project",
+    "exploreProjectsButton": "Explore Projects"
+  },
+  "Stats": {
+    "projects": "Projects",
+    "users": "Users",
+    "monthlyViews": "Monthly Views"
+  },
+  "FeaturedProducts": {
+    "title": "Featured Products",
+    "description": "Top picks from the community",
+    "viewAllButton": "View All Products",
+    "featuredBadge": "Featured"
+  },
+  "ProductsPage": {
+    "title": "All Products",
+    "description": "All products from the community"
+  },
+  "ProductDetails": {
+    "about": "About",
+    "productDetails": "Product Details",
+    "launched": "Launched",
+    "submittedBy": "Submitted by",
+    "supportProduct": "Support this product",
+    "featuredProduct": "Featured Product",
+    "visitWebsite": "Visit website",
+    "by": "By"
+  },
+  "ExplorePage": {
+    "title": "Explore All Products",
+    "description": "Browse all products from the community"
+  },
+  "SubmitPage": {
+    "title": "Submit a Project",
+    "description": "Submit a project to the community"
+  },
+  "SubmitForm": {
+    "nameLabel": "Name",
+    "namePlaceholder": "Enter the name of the product",
+    "slugLabel": "Slug",
+    "slugPlaceholder": "Enter the slug of the product",
+    "slugHelper": "The slug is the URL-friendly version of the product name.",
+    "taglineLabel": "Tagline",
+    "taglinePlaceholder": "A short, catchy tagline for your product",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "Tell us about your product",
+    "websiteUrlLabel": "Website URL",
+    "websiteUrlPlaceholder": "https://example.com",
+    "websiteUrlHelper": "The website URL is the URL of the product's website.",
+    "tagsLabel": "Tags",
+    "tagsPlaceholder": "e.g., AI, Productivity, SaaS (comma separated)",
+    "tagsHelper": "Tags help users discover your product.",
+    "submitButton": "Submit Product",
+    "submittingButton": "Submitting...",
+    "required": "*"
+  },
+  "AdminPage": {
+    "title": "Product Admin",
+    "description": "Review and manage submitted products",
+    "pendingApproval": "Pending Approval",
+    "allProducts": "All Products",
+    "emptyState": "No pending products to review. Check back later!",
+    "approveButton": "Approve",
+    "rejectButton": "Reject",
+    "deleteButton": "delete",
+    "visitWebsite": "Visit Website"
+  },
+  "ProductStatus": {
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "pending": "Pending"
+  },
+  "Common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "upvote": "Upvote",
+    "downvote": "Downvote"
   }
 }

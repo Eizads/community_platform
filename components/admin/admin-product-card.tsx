@@ -16,12 +16,17 @@ import { Button } from "../ui/button"
 import { ExternalLinkIcon, Trash2Icon } from "lucide-react"
 import PendingApprovalButtons from "@/components/admin/pending-approval-buttons"
 import { deleteProductAction } from "@/lib/admin-actions"
+import { useTranslations } from "next-intl"
 
 export default function AdminProductCard({
   product,
 }: {
   product: ProductType
 }) {
+  const t = useTranslations("AdminPage")
+  const tStatus = useTranslations("ProductStatus")
+  const tDetails = useTranslations("ProductDetails")
+  
   const handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
     e.preventDefault()
@@ -65,7 +70,7 @@ export default function AdminProductCard({
             {/* submitted by */}
             <div className="flex flex-row gap-2 flex-wrap items-center">
               <p className="text-sm text-gray-500">
-                By: <span className="font-bold">{product.submittedBy}</span>
+                {tDetails("by")}: <span className="font-bold">{product.submittedBy}</span>
               </p>
               <p className="text-sm text-gray-500">
                 {product.createdAt
@@ -82,7 +87,7 @@ export default function AdminProductCard({
               >
                 <Button variant="ghost" size="sm">
                   <ExternalLinkIcon className="w-4 h-4" />
-                  Visit Website
+                  {t("visitWebsite")}
                 </Button>
               </Link>
             </div>
@@ -103,7 +108,7 @@ export default function AdminProductCard({
           </div>
           <Button variant="outline" size="sm" onClick={handleDelete}>
             <Trash2Icon className="w-4 h-4" />
-            delete
+            {t("deleteButton")}
           </Button>
         </CardFooter>
       </CardContent>

@@ -8,7 +8,7 @@ import { CalendarIcon, UserIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import ProductVoting from "@/components/products/product-voting"
-import { setRequestLocale } from "next-intl/server"
+import { setRequestLocale, getTranslations } from "next-intl/server"
 
 export async function generateStaticParams() {
   const products = await getFeaturedProducts()
@@ -24,6 +24,7 @@ export default async function ProductPage({
 }) {
   const { locale, slug } = await params
   setRequestLocale(locale)
+  const t = await getTranslations("ProductDetails")
   const product = await getProductBySlug(slug)
   if (!product) {
     notFound()
@@ -65,18 +66,18 @@ export default async function ProductPage({
                 ))}
               </div>
               <div className="prose prose-neutral dark:prose-invert">
-                <h2 className="font-bold text-lg my-4">About</h2>
+                <h2 className="font-bold text-lg my-4">{t("about")}</h2>
                 <p>{description}</p>
               </div>
             </div>
             <div className="border rounded-md border-gray-300 bg-white p-4 space-y-2 ">
-              <h2 className="font-bold text-lg ">Product Details</h2>
+              <h2 className="font-bold text-lg ">{t("productDetails")}</h2>
               <p className="flex items-center gap-2">
-                <CalendarIcon className="w-4 h-4" /> Launched:{" "}
+                <CalendarIcon className="w-4 h-4" /> {t("launched")}:{" "}
                 {createdAt?.toLocaleDateString()}
               </p>
               <p className="flex items-center gap-2">
-                <UserIcon className="w-4 h-4" /> Submitted by: {submittedBy}
+                <UserIcon className="w-4 h-4" /> {t("submittedBy")}: {submittedBy}
               </p>
             </div>
           </div>
@@ -91,7 +92,7 @@ export default async function ProductPage({
                 )}
               >
                 <p className="font-bold text-lg text-center ">
-                  Support this product
+                  {t("supportProduct")}
                 </p>
                 <ProductVoting product={product} />
               </div>
@@ -101,7 +102,7 @@ export default async function ProductPage({
                   className="bg-sky-500 text-white w-full text-center"
                 >
                   <StarIcon className="w-4 h-4" />
-                  Featured Product
+                  {t("featuredProduct")}
                 </Badge>
               )}
             </div>
@@ -111,7 +112,7 @@ export default async function ProductPage({
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Visit website
+                {t("visitWebsite")}
                 <ExternalLinkIcon className="w-4 h-4" />
               </a>
             </Button>
